@@ -7,8 +7,15 @@
 #'
 #' @examples
 #' # Convert a vector of inconsistent formatted address to a standard format
-#' x <- c("68/150 Acton Road, Acton ACT 2601", "655 Jackson St, Dickson ACT 2602", "Unit 60 523 Joey Cct, Layton NSW 6500", "23/100 de burgh road, Southbank VIC 7800", "999 Lords pl, Sydney nsw 6600", "i don't know the address")
-#' chat <- chat_ollama(model = "llama3.1:8b", seed = 0, echo = "none")
+#' x <- c("154 university avenue, acton act 2601",
+#'        "76/2 Cape Street, Dickson ACT 2602",
+#'        "Shop 4/96 Bunda St, Canberra ACT 2601",
+#'        "11 E Row, Canberra ACT 2601",
+#'        "173/46 Macquarie St, Barton ACT 2600",
+#'        "Unit 189/260 City walk, Canberra ACT 2601",
+#'        "the kebab place",
+#'        "i don't know the address")
+#' chat <- ellmer::chat_ollama(model = "llama3.1:8b", seed = 0, echo = "none")
 #' emend_clean_address(x, chat = chat)
 #'
 #' @export

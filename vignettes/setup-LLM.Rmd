@@ -14,7 +14,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-`SAI` by default requires [Ollama](#ollama) to be installed and running. The benefit of using Ollama is that it uses a local LLM and requires no internet access. However, there is some set up and minimum computing requirements (depending on the LLM selected). There is no payment required to use Ollama.
+`emend` by default requires [Ollama](#ollama) to be installed and running. The benefit of using Ollama is that it uses a local LLM and requires no internet access. However, there is some set up and minimum computing requirements (depending on the LLM selected). There is no payment required to use Ollama.
 
 
 User who have difficulty setting up Ollama can alternatively register an account with an AI vendor listed [below](#api). There may payments involved for continued usage from these vendors. 
@@ -37,7 +37,7 @@ Check the version of ollama.
 ollama --version
 ```
 
-Pull a LLM, say `llama3.1:8b` (see list of models available [here](https://ollama.com/library)). Currently `r SAI::sai_get_option("model")$model` is the default.
+Pull a LLM, say `llama3.1:8b` (see list of models available [here](https://ollama.com/library)). We have used this model to demonstrate the result. 
 
 ```
 ollama pull llama3.1:8b

@@ -7,13 +7,11 @@
 emend_lvl_match(.f, levels = NULL, chat = NULL, ...)
 }
 \arguments{
-\item{.f}{A factor.}
+\item{.f}{A vector of characters or a factor.}
 
 \item{levels}{The levels of the factor.}
 
 \item{chat}{The chat object defined by ellmer.}
-
-\item{...}{Other prompts to the LLM.}
 }
 \description{
 Match the input factor to supplied levels.
