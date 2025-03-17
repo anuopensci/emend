@@ -17,25 +17,35 @@ emend_clean_address <- function(address_vector, chat = NULL){
   if (!is.character(address_vector)) {rlang::abort("Input must be a character vector.")}
   if (is.null(chat)) {rlang::abort("Please provide the chat environment.")}
 
-  chat$clone()
+  chat$set_system_prompt(paste0(
+    "You are an expert in address formatting. \n",
+    "Your task is to standardize addresses into the following format: \n",
+    "**Unit/House Number, Street Name, Suburb, State Abbreviation, Postcode** \n",
+    "### Examples: \n",
+    "Input: 46 sullivan's creek road, acton act 2601 \n",
+    "Output: 46 Sullivan's Creek Rd, Acton ACT 2601 \n",
+    "\n ",
+    "Input: 403/100 de Burgh Street, Lyneham ACT 2602 \n",
+    "Output: 403/100 De Burgh St, Lyneham ACT 2602 \n",
+    "\n ",
+    "Input: Unit 1 20 Challis St, Dickson ACT 2602 \n",
+    "Output: 1/20 Challis St, Dickson ACT 2602 \n",
+    "\n",
+    "Input: Shop 4/2 Frencham Pl, Downer ACT 2602 \n",
+    "Output: 4/2 Frencham Pl, Downer ACT 2602 \n",
+    "\n",
+    "Input: 36 badham st, Dickson ACT 2602 \n",
+    "Output: 36 Badham St, Dickson ACT 2602 \n",
+    "### Output Rules: \n",
+    "- Output 'INVALID ADDRESS' if not recognised. \n",
+    "- Return output only, no explanation or comment. \n"
+  ))
+
   chat$set_turns(list())
 
-  converted <- lapply(address_vector, function(x){
+  converted <- lapply(address_vector, function(x) {
     response <- chat$chat(paste0(
-      "You are a tool for reformatting addresses into a standard format. Return result only, no explanation or comment.
-
-       Follow these examples:
-
-       Input: 31 constitution ave, canberra ACT 2601
-       Output: 31 Constitution Avenue, Canberra ACT 2601
-
-       Input: Unit 38 46 Oxford St, Darlinghurst NSW 2010
-       Output: 38/46 Oxford St, Darlinghurst NSW 2010
-
-       Input: Unit 11, 17 Cohen Place, Melbourne VIC 3000
-       Output: 11/17 Cohen Place, Melbourne VIC 3000
-
-       Now process: ", x
+      "Now process: ", x
     ))
     return(response)
   })
