@@ -241,3 +241,19 @@
 #'
 #' @source https://catalog.data.gov/dataset/warehouse-and-retail-sales
 "alcohol"
+
+#' Registration data for workshops
+#'
+#' @description
+#' A dataset containing registration information for a series of workshops
+#' The dataset includes columns for workshop name, affiliation, and the cleaned affiliation by hand.
+#'
+#' @format A data frame with 221 rows and 3 columns:
+#' \describe{
+#'   \item{Workshop}{Character: Workshop name and time.}
+#'   \item{Affiliation}{Character: Affiliation input by participants.}
+#'   \item{GroundTruth}{Character: The cleaned affiliation type, cleaned manually by author.}
+#' }
+#'
+#' @source Real registration data from the Biological Data Science Institute, Australian National University.
+"registration"

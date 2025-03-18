@@ -9,7 +9,7 @@ You can use this functions to clean up your categorical data and obtain unique l
 Double check if the output from LLM is true to your data.
 This function is generally suitable for categories, not working well with sentences and too many categories.}
 \usage{
-emend_get_levels(.f, chat = NULL, ...)
+emend_get_levels(.f, chat = NULL)
 }
 \arguments{
 \item{.f}{A vector of characters or a factor.}

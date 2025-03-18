@@ -4,7 +4,7 @@
 \alias{emend_fct_match}
 \title{Match input factor to specified levels.}
 \usage{
-emend_fct_match(.f, levels = NULL, chat = NULL, ...)
+emend_fct_match(.f, levels = NULL, chat = NULL)
 }
 \arguments{
 \item{.f}{A factor.}
@@ -12,14 +12,12 @@ emend_fct_match(.f, levels = NULL, chat = NULL, ...)
 \item{levels}{The levels of the factor}
 
 \item{chat}{A chat object defined by ellmer.}
-
-\item{...}{Other prompts to the LLM.}
 }
 \description{
 Match input factor to specified levels.
 }
 \examples{
-chat <- chat_ollama(model = "llama3.1:8b", seed = 0, echo = "none")
+chat <- ellmer::chat_ollama(model = "llama3.1:8b", seed = 0, echo = "none")
 emend_fct_match(messy$country, levels = c("UK", "USA", "Canada", "Australia", "NZ"), chat = chat)
 
 }

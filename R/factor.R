@@ -6,11 +6,14 @@
 #'
 #' @seealso [emend_lvl_sweep()]
 #' @examples
-#' chat <- chat_ollama(model = "llama3.1:8b", seed = 0, echo = "none")
-#' emend_lvl_match(messy$country, levels = c("Asia", "Europe", "North America", "Oceania", "South America"), chat = chat)
+#' chat <- ellmer::chat_ollama(model = "llama3.1:8b", seed = 0, echo = "none")
+#' emend_lvl_match(messy$country,
+#'                 levels = c("Asia", "Europe", "North America", "Oceania",
+#'                            "South America"),
+#'                 chat = chat)
 #'
 #' @export
-emend_lvl_match <- function(.f, levels = NULL, chat = NULL, ...) {
+emend_lvl_match <- function(.f, levels = NULL, chat = NULL) {
   if(is.null(levels)) cli::cli_abort("Please provide the levels of the factor.")
   if(is.null(chat)) cli::cli_abort("Please provide the chat object.")
 
@@ -42,35 +45,35 @@ emend_lvl_match <- function(.f, levels = NULL, chat = NULL, ...) {
 }
 
 #' @export
-format.emend_lvl_match <- function(x, ...) {
-  out <- data.frame(original = names(x), converted = unname(unclass(x))) |>
-    subset(is.na(converted) | original != converted)
+format.emend_lvl_match <- function(x) {
+  original <- names(x)
+  converted <- unname(unclass(x))
+  out <- data.frame(original, converted) |> subset(is.na(converted) | original != converted)
   out <- out[order(out$converted), ]
   rownames(out) <- NULL
   out
 }
 
 #' @export
-print.emend_lvl_match <- function(x, ...) {
+print.emend_lvl_match <- function(x) {
   print(unclass(x))
   cli::cli_h1("Converted by emend:")
   out <- format(x)
-  print(out, ...)
+  print(out)
 }
 
 #' Match input factor to specified levels.
 #' @param .f A factor.
 #' @param levels The levels of the factor
 #' @param chat A chat object defined by ellmer.
-#' @param ... Other prompts to the LLM.
 #'
 #' @examples
-#' chat <- chat_ollama(model = "llama3.1:8b", seed = 0, echo = "none")
+#' chat <- ellmer::chat_ollama(model = "llama3.1:8b", seed = 0, echo = "none")
 #' emend_fct_match(messy$country, levels = c("UK", "USA", "Canada", "Australia", "NZ"), chat = chat)
 #'
 #' @export
-emend_fct_match <- function(.f, levels = NULL, chat = NULL, ...) {
-  dict <- emend_lvl_match(.f, levels, chat, ...)
+emend_fct_match <- function(.f, levels = NULL, chat = NULL) {
+  dict <- emend_lvl_match(.f, levels, chat)
   factor(unname(unclass(dict)[.f]), levels = levels)
 }
 
@@ -79,21 +82,21 @@ emend_fct_match <- function(.f, levels = NULL, chat = NULL, ...) {
 #' @param chat A chat object defined by ellmer.
 #'
 #' @examples
-#' chat <- chat_ollama(model = "llama3.1:8b", seed = 0, echo = "none")
+#' chat <- ellmer::chat_ollama(model = "llama3.1:8b", seed = 0, echo = "none")
 #' emend_fct_reorder(likerts$likert1, chat = chat) |> levels()
 #'
 #' @export
-emend_fct_reorder <- function(.f, chat = NULL, ...) {
+emend_fct_reorder <- function(.f, chat = NULL) {
   if(is.null(.f)) cli::cli_abort("Please provide the input vector or factor.")
   if(!is.character(.f) && !is.factor(.f)) cli::cli_abort("Input must be a charactor vector or a factor.")
   if(is.null(chat)) cli::cli_abort("Please provide the chat object.")
 
-  lvls <- reorder_by_llm(unique(.f), chat = chat, ...)
+  lvls <- reorder_by_llm(unique(.f), chat = chat)
   factor(.f, levels = lvls)
 }
 
 # reorder_3 replace function
-reorder_by_llm <- function(lvls, chat = NULL, ...) {
+reorder_by_llm <- function(lvls, chat = NULL) {
 
   chat$set_system_prompt(
     paste0(
@@ -124,14 +127,13 @@ reorder_by_llm <- function(lvls, chat = NULL, ...) {
 #'
 #' @param .f A factor.
 #' @param chat A chat object defined by ellmer.
-#' @param ... Other prompts to the LLM.
 #'
 #' @examples
-#' chat <- chat_ollama(model = "llama3.1:8b", seed = 0, echo = "none")
+#' chat <- ellmer::chat_ollama(model = "llama3.1:8b", seed = 0, echo = "none")
 #' emend_lvl_sweep(messy$country, chat = chat)
 #'
 #' @export
-emend_lvl_sweep <- function(.f, chat = NULL, ...){
+emend_lvl_sweep <- function(.f, chat = NULL){
   if(is.null(.f)) cli::cli_abort("Please provide the input vector or factor.")
   if(!is.character(.f) && !is.factor(.f)) cli::cli_abort("Input must be a charactor vector or a factor.")
   if(is.null(chat)) cli::cli_abort("Please provide the chat environment.")
@@ -142,7 +144,6 @@ emend_lvl_sweep <- function(.f, chat = NULL, ...){
   levels_chat <- chat$chat(paste0(
     "I have a list of text data and they are messy. Some used abbreviations and some used full names. ",
     "Please standardise it using full names. ",
-    ...,
     "Now process: ",
     paste(levels_0, collapse = ", "), ". ",
     "Return result in a pairwise JSON object only. No commentary. No code writing. No code wrapper."))
@@ -159,21 +160,21 @@ emend_lvl_sweep <- function(.f, chat = NULL, ...){
 }
 
 #' @export
-format.emend_lvl_sweep <- function(x, ...) {
-  out <- data.frame(original = names(x), converted = unname(unclass(x))) |>
-    subset(is.na(converted) | original != converted) |>
-    unique()
+format.emend_lvl_sweep <- function(x) {
+  original <- names(x)
+  converted <- unname(unclass(x))
+  out <- data.frame(original, converted) |> subset(is.na(converted) | original != converted) |> unique()
   out <- out[order(out$converted), ]
   rownames(out) <- NULL
   out
 }
 
 #' @export
-print.emend_lvl_sweep <- function(x, ...) {
+print.emend_lvl_sweep <- function(x) {
   print(unclass(x))
   cli::cli_h1("Converted by emend:")
   out <- format(x)
-  print(out, ...)
+  print(out)
 }
 
 #' Get the unique levels of messy categorical data
@@ -191,7 +192,7 @@ print.emend_lvl_sweep <- function(x, ...) {
 #' emend_get_levels(messy$country, chat = chat)
 #'
 #' @export
-emend_get_levels <- function(.f, chat = NULL, ...){
+emend_get_levels <- function(.f, chat = NULL){
   if(is.null(.f)) cli::cli_abort("Please provide the input vector or factor.")
   if(!is.character(.f) && !is.factor(.f)) cli::cli_abort("Input must be a charactor vector or a factor.")
   if(is.null(chat)) cli::cli_abort("Please provide the chat environment.")

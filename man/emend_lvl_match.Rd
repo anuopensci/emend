@@ -4,7 +4,7 @@
 \alias{emend_lvl_match}
 \title{Match the input factor to supplied levels.}
 \usage{
-emend_lvl_match(.f, levels = NULL, chat = NULL, ...)
+emend_lvl_match(.f, levels = NULL, chat = NULL)
 }
 \arguments{
 \item{.f}{A vector of characters or a factor.}
@@ -17,8 +17,11 @@ emend_lvl_match(.f, levels = NULL, chat = NULL, ...)
 Match the input factor to supplied levels.
 }
 \examples{
-chat <- chat_ollama(model = "llama3.1:8b", seed = 0, echo = "none")
-emend_lvl_match(messy$country, levels = c("Asia", "Europe", "North America", "Oceania", "South America"), chat = chat)
+chat <- ellmer::chat_ollama(model = "llama3.1:8b", seed = 0, echo = "none")
+emend_lvl_match(messy$country,
+                levels = c("Asia", "Europe", "North America", "Oceania",
+                           "South America"),
+                chat = chat)
 
 }
 \seealso{

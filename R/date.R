@@ -7,13 +7,14 @@
 #' @param chat A chat object defined by ellmer.
 #'
 #' @examples
-#' x <- c("16/02/1997", "20 November 2024", "24 Mar 2022", "2000-01-01", "Jason", "Dec 25, 2030", "12/05/2024")
+#' x <- c("16/02/1997", "20 November 2024", "24 Mar 2022", "2000-01-01",
+#'        "Jason", "Dec 25, 2030", "12/05/2024")
 #' chat <- ellmer::chat_ollama(model = "llama3.1:8b", seed = 0, echo = "none")
-#' emend__clean_date(x, chat = chat)
+#' emend_clean_date(x, chat = chat)
 #'
 #' # To specify the input date format:
 #' x <- c("12/05/2024", "11/15/2024", "02/25/2024")
-#' emend_clean_date(x, input_format = "MM/DD/YYYY")
+#' emend_clean_date(x, input_format = "MM/DD/YYYY", chat = chat)
 #'
 #' @export
 emend_clean_date <- function(dates_vector, input_format = "DD-MM-YYYY", chat = NULL) {

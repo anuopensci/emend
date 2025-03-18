@@ -1,14 +1,15 @@
 #' Translate text from one language to another.
 #'
 #' @param text The text to translate.
-#' @param from The language to translate from. The default is NULL (not specified).
 #' @param to The language to translate to. The default is "English".
+#' @param chat An ellmer Chat object.
 #'
 #' @examples
-#' emend_translate(c("猿も木から落ちる", "你好", "bon appetit"))
+#' chat <- ellmer::chat_ollama(model = "llama3.1:8b", seed = 0, echo = "none")
+#' emend_translate(c("猿も木から落ちる", "你好", "bon appetit"), chat = chat)
 #'
 #' @export
-emend_translate <- function(text, from = NULL, to = "English", chat = NULL) {
+emend_translate <- function(text, to = "English", chat = NULL) {
 
   if (!is.character(text)) {
     rlang::abort("Input must be a character vector.")
@@ -38,7 +39,8 @@ emend_translate <- function(text, from = NULL, to = "English", chat = NULL) {
 #' @param chat A chat object defined by ellmer
 #'
 #' @examples
-#' emend_what_language(c("猿も木から落ちる", "你好", "bon appetit")
+#' chat <- ellmer::chat_ollama(model = "llama3.1:8b", seed = 0, echo = "none")
+#' emend_what_language(c("猿も木から落ちる", "你好", "bon appetit"), chat = chat)
 #'
 #' @export
 emend_what_language <- function(text, chat = NULL) {

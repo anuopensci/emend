@@ -4,19 +4,20 @@
 \alias{emend_translate}
 \title{Translate text from one language to another.}
 \usage{
-emend_translate(text, from = NULL, to = "English", chat = NULL)
+emend_translate(text, to = "English", chat = NULL)
 }
 \arguments{
 \item{text}{The text to translate.}
 
-\item{from}{The language to translate from. The default is NULL (not specified).}
-
 \item{to}{The language to translate to. The default is "English".}
+
+\item{chat}{An ellmer Chat object.}
 }
 \description{
 Translate text from one language to another.
 }
 \examples{
-emend_translate(c("猿も木から落ちる", "你好", "bon appetit"))
+chat <- ellmer::chat_ollama(model = "llama3.1:8b", seed = 0, echo = "none")
+emend_translate(c("猿も木から落ちる", "你好", "bon appetit"), chat = chat)
 
 }

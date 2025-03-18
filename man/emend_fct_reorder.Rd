@@ -4,7 +4,7 @@
 \alias{emend_fct_reorder}
 \title{Reorder the levels of the input factor in a meaningful way.}
 \usage{
-emend_fct_reorder(.f, chat = NULL, ...)
+emend_fct_reorder(.f, chat = NULL)
 }
 \arguments{
 \item{.f}{A vector of characters or a factor.}
@@ -15,7 +15,7 @@ emend_fct_reorder(.f, chat = NULL, ...)
 Reorder the levels of the input factor in a meaningful way.
 }
 \examples{
-chat <- chat_ollama(model = "llama3.1:8b", seed = 0, echo = "none")
+chat <- ellmer::chat_ollama(model = "llama3.1:8b", seed = 0, echo = "none")
 emend_fct_reorder(likerts$likert1, chat = chat) |> levels()
 
 }

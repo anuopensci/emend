@@ -11,17 +11,14 @@ Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.2
 Imports: 
     cli,
-    clipr,
-    ellmer,
-    glue,
-    httr2,
     jsonlite,
-    stringr,
+    rlang, 
     dplyr
 Depends: 
     R (>= 2.10)
 LazyData: true
 Suggests: 
+    ellmer, 
     knitr,
     rmarkdown,
     testthat (>= 3.0.0)

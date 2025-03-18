@@ -4,20 +4,18 @@
 \alias{emend_lvl_sweep}
 \title{Clean up the levels for the input factor.}
 \usage{
-emend_lvl_sweep(.f, chat = NULL, ...)
+emend_lvl_sweep(.f, chat = NULL)
 }
 \arguments{
 \item{.f}{A factor.}
 
 \item{chat}{A chat object defined by ellmer.}
-
-\item{...}{Other prompts to the LLM.}
 }
 \description{
 Clean up the levels for the input factor.
 }
 \examples{
-chat <- chat_ollama(model = "llama3.1:8b", seed = 0, echo = "none")
+chat <- ellmer::chat_ollama(model = "llama3.1:8b", seed = 0, echo = "none")
 emend_lvl_sweep(messy$country, chat = chat)
 
 }
