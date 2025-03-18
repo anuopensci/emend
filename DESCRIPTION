@@ -12,8 +12,7 @@ RoxygenNote: 7.3.2
 Imports: 
     cli,
     jsonlite,
-    rlang, 
-    dplyr
+    rlang
 Depends: 
     R (>= 2.10)
 LazyData: true

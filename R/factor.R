@@ -40,12 +40,12 @@ emend_lvl_match <- function(.f, levels = NULL, chat = NULL) {
 
   out <- unlist(matched)
   out[!out %in% levels] <- "Unidentified"
-  dict <- setNames(c(out, lvls_intersect), c(lvls_unmatched, lvls_intersect))
+  dict <- stats::setNames(c(out, lvls_intersect), c(lvls_unmatched, lvls_intersect))
   structure(dict, class = c("emend_lvl_match", class(dict)))
 }
 
 #' @export
-format.emend_lvl_match <- function(x) {
+format.emend_lvl_match <- function(x, ...) {
   original <- names(x)
   converted <- unname(unclass(x))
   out <- data.frame(original, converted) |> subset(is.na(converted) | original != converted)
@@ -55,7 +55,7 @@ format.emend_lvl_match <- function(x) {
 }
 
 #' @export
-print.emend_lvl_match <- function(x) {
+print.emend_lvl_match <- function(x, ...) {
   print(unclass(x))
   cli::cli_h1("Converted by emend:")
   out <- format(x)
@@ -121,60 +121,6 @@ reorder_by_llm <- function(lvls, chat = NULL) {
   df <- data.frame(Level = lvls, Score = scores)
   df_ordered <- df[order(df$Score), ]
   return(df_ordered$Level)
-}
-
-#' Clean up the levels for the input factor.
-#'
-#' @param .f A factor.
-#' @param chat A chat object defined by ellmer.
-#'
-#' @examples
-#' chat <- ellmer::chat_ollama(model = "llama3.1:8b", seed = 0, echo = "none")
-#' emend_lvl_sweep(messy$country, chat = chat)
-#'
-#' @export
-emend_lvl_sweep <- function(.f, chat = NULL){
-  if(is.null(.f)) cli::cli_abort("Please provide the input vector or factor.")
-  if(!is.character(.f) && !is.factor(.f)) cli::cli_abort("Input must be a charactor vector or a factor.")
-  if(is.null(chat)) cli::cli_abort("Please provide the chat environment.")
-
-  chat$set_turns(list())
-
-  levels_0 <- unique(.f)
-  levels_chat <- chat$chat(paste0(
-    "I have a list of text data and they are messy. Some used abbreviations and some used full names. ",
-    "Please standardise it using full names. ",
-    "Now process: ",
-    paste(levels_0, collapse = ", "), ". ",
-    "Return result in a pairwise JSON object only. No commentary. No code writing. No code wrapper."))
-
-  levels_1 <- tryCatch({
-    unlist(jsonlite::fromJSON(levels_chat))}, error = function(e) {
-      cli::cli_warn("Failed to parse JSON response: {e$message}")
-      return(setNames(rep(NA_character_, length(levels_0)), levels_0))
-    })
-
-  result <- dplyr::recode(.f, !!!levels_1)
-  dict <- setNames(result, .f)
-  structure(dict, class = c("emend_lvl_sweep", class(dict)))
-}
-
-#' @export
-format.emend_lvl_sweep <- function(x) {
-  original <- names(x)
-  converted <- unname(unclass(x))
-  out <- data.frame(original, converted) |> subset(is.na(converted) | original != converted) |> unique()
-  out <- out[order(out$converted), ]
-  rownames(out) <- NULL
-  out
-}
-
-#' @export
-print.emend_lvl_sweep <- function(x) {
-  print(unclass(x))
-  cli::cli_h1("Converted by emend:")
-  out <- format(x)
-  print(out)
 }
 
 #' Get the unique levels of messy categorical data

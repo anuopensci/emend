@@ -36,11 +36,10 @@ You can install the development version of emend like below:
 ``` r
 # install.packages("pak")
 pak::pak("emitanaka/emend")
-#> ✔ Updated metadata database: 5.26 MB in 4 files.
-#> ℹ Updating metadata database✔ Updating metadata database ... done
+#> ℹ Loading metadata database✔ Loading metadata database ... done
 #>  
 #> ℹ No downloads are needed
-#> ✔ 1 pkg + 33 deps: kept 34 [14.8s]
+#> ✔ 1 pkg + 17 deps: kept 18 [7.4s]
 ```
 
 ## Examples
@@ -119,34 +118,26 @@ emend_lvl_match(messy$country, levels = c("Asia", "Europe", "North America", "Oc
 ```
 
 The above process required specification of all the levels but sometimes
-you may not know ahead all of the levels. The `emend_lvl_sweep()`
-function will attempt to clean up the levels. Below it gets most right
-but classifies “Australia” wrong.
+you may not know ahead all of the levels. The `emend_get_levels()`
+function will attempt to clean up the levels.
 
 ``` r
-emend_lvl_sweep(messy$country, chat = chat)
-#> Warning: Failed to parse JSON response: lexical error: malformed number, a digit is
-#> required after the minus sign.  ania", "NZ": "New Zealand" -> "Oceania"
-#> "Australia": "Oc (right here) ------^
-#>             UK             US         Canada             UK             US 
-#>             NA             NA             NA             NA             NA 
-#>         Canada United Kingdom            USA    New Zealand             NZ 
-#>             NA             NA             NA             NA             NA 
-#>      Australia    New Zealand             UK United Kingdom             UK 
-#>             NA             NA             NA             NA             NA 
-#>             US United Kingdom      Australia             US      Australia 
-#>             NA             NA             NA             NA             NA
-#> 
-#> ── Converted by emend: ─────────────────────────────────────────────────────────
-#>         original converted
-#> 1             UK      <NA>
-#> 2             US      <NA>
-#> 3         Canada      <NA>
-#> 4 United Kingdom      <NA>
-#> 5            USA      <NA>
-#> 6    New Zealand      <NA>
-#> 7             NZ      <NA>
-#> 8      Australia      <NA>
+levels <- emend_get_levels(messy$country, chat = chat)
+print(levels)
+#> [1] "United Kingdom" "United States"  "Canada"         "New Zealand"   
+#> [5] "Australia"
+```
+
+Then you can use the cleaned levels to map the messy data to the correct
+levels.
+
+``` r
+emend_fct_match(messy$country, levels = levels, chat = chat)
+#>  [1] United Kingdom United States  Canada         United Kingdom United States 
+#>  [6] Canada         United Kingdom United States  New Zealand    New Zealand   
+#> [11] Australia      New Zealand    United Kingdom United Kingdom United Kingdom
+#> [16] United States  United Kingdom Australia      United States  Australia     
+#> Levels: United Kingdom United States Canada New Zealand Australia
 ```
 
 ### Correcting order of levels for ordinal variables

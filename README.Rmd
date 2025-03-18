@@ -80,10 +80,16 @@ The function actually works to match a continent as well! Let's use `emend_lvl_m
 emend_lvl_match(messy$country, levels = c("Asia", "Europe", "North America", "Oceania", "South America"), chat = chat)
 ```
 
-The above process required specification of all the levels but sometimes you may not know ahead all of the levels. The `emend_lvl_sweep()` function will attempt to clean up the levels. Below it gets most right but classifies "Australia" wrong.
+The above process required specification of all the levels but sometimes you may not know ahead all of the levels. The `emend_get_levels()` function will attempt to clean up the levels. 
 
 ```{r}
-emend_lvl_sweep(messy$country, chat = chat)
+levels <- emend_get_levels(messy$country, chat = chat)
+print(levels)
+```
+Then you can use the cleaned levels to map the messy data to the correct levels.
+
+```{r}
+emend_fct_match(messy$country, levels = levels, chat = chat)
 ```
 
 ### Correcting order of levels for ordinal variables
