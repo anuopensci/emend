@@ -40,11 +40,15 @@ pak::pak("emitanaka/emend")
 #>  
 #> → Will update 1 package.
 #> → Will download 1 package with unknown size.
-#> + emend 0.0.0.9000 → 0.0.0.9000 [bld][cmp][dl] (GitHub: 1ca99f9)
+#> + emend 0.0.0.9000 → 0.0.0.9000 [bld][cmp][dl] (GitHub: eff7b49)
 #> ℹ Getting 1 pkg with unknown size
-#> ✔ Cached copy of emend 0.0.0.9000 (source) is the latest build
-#> ✔ Installed emend 0.0.0.9000 (github::emitanaka/emend@1ca99f9) (256ms)
-#> ✔ 1 pkg + 3 deps: kept 3, upd 1 [15.2s]
+#> ✔ Got emend 0.0.0.9000 (source) (2.58 MB)
+#> ℹ Packaging emend 0.0.0.9000
+#> ✔ Packaged emend 0.0.0.9000 (2.6s)
+#> ℹ Building emend 0.0.0.9000
+#> ✔ Built emend 0.0.0.9000 (8.5s)
+#> ✔ Installed emend 0.0.0.9000 (github::emitanaka/emend@eff7b49) (212ms)
+#> ✔ 1 pkg + 3 deps: kept 3, upd 1, dld 1 (NA B) [22.1s]
 ```
 
 ## Examples
@@ -227,8 +231,8 @@ to standardise the dates to the international standard “YYYY-MM-DD”.
 x <- c("16/02/1997", "20 November 2024", "24 Mar 2022", "2000-01-01", "Jason", 
        "Dec 25, 2030", "11/05/2024", "March 10, 1999")
 emend_clean_date(x, chat = chat)
-#> [1] "1997-02-16" NA           NA           "2000-01-01" NA          
-#> [6] NA           "2024-05-11" NA
+#> [1] "1997-02-16" "2024-11-20" "2022-03-24" "2000-01-01" NA          
+#> [6] "2030-12-25" "2024-11-05" "1999-03-10"
 ```
 
 ## Addresses
