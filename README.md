@@ -38,8 +38,13 @@ You can install the development version of emend like below:
 pak::pak("emitanaka/emend")
 #> ℹ Loading metadata database✔ Loading metadata database ... done
 #>  
-#> ℹ No downloads are needed
-#> ✔ 1 pkg + 17 deps: kept 18 [7.4s]
+#> → Will update 1 package.
+#> → Will download 1 package with unknown size.
+#> + emend 0.0.0.9000 → 0.0.0.9000 [bld][cmp][dl] (GitHub: 1ca99f9)
+#> ℹ Getting 1 pkg with unknown size
+#> ✔ Cached copy of emend 0.0.0.9000 (source) is the latest build
+#> ✔ Installed emend 0.0.0.9000 (github::emitanaka/emend@1ca99f9) (256ms)
+#> ✔ 1 pkg + 3 deps: kept 3, upd 1 [15.2s]
 ```
 
 ## Examples
@@ -219,21 +224,11 @@ and can be time-consuming. The `emend_clean_date()` function uses an LLM
 to standardise the dates to the international standard “YYYY-MM-DD”.
 
 ``` r
-x <- c("16/02/1997", "20 November 2024", "24 Mar 2022", "2000-01-01", "Jason", "Dec 25, 2030", "12/05/2024")
+x <- c("16/02/1997", "20 November 2024", "24 Mar 2022", "2000-01-01", "Jason", 
+       "Dec 25, 2030", "11/05/2024", "March 10, 1999")
 emend_clean_date(x, chat = chat)
 #> [1] "1997-02-16" NA           NA           "2000-01-01" NA          
-#> [6] NA           "2024-05-12"
-```
-
-By default, the function interprets dates in the format “XX/XX/YYYY” as
-the European style “DD/MM/YYYY”. If the dates are in the US style
-“MM/DD/YYYY”, you can specify the input date format using the
-`input_format` option.
-
-``` r
-x <- c("12/25/2024", "Nov 15, 2024", "02/25/2024")
-emend_clean_date(x, input_format = "MM/DD/YYYY", chat = chat)
-#> [1] "2024-12-25" NA           "2024-02-25"
+#> [6] NA           "2024-05-11" NA
 ```
 
 ## Addresses
@@ -245,19 +240,23 @@ into a consistent format and returns an empty value for items that are
 not addresses.
 
 ``` r
-x <- c("68/150 Acton Road, Acton ACT 2601",
-       "655 Jackson St, Dickson ACT 2602",
-       "Unit 60 523 Joey Cct, Layton NSW 6500",
-       "23/100 de burgh road, Southbank VIC 7800",
-       "91 Sullivan pl, Sydney nsw 6600",
+x <- c("154 university avenue, acton act 2601",
+       "76/2 Cape Street, Dickson ACT 2602",
+       "Shop 4/96 Bunda St, Canberra ACT 2601",
+       "11 E Row, Canberra ACT 2601",
+       "173/46 Macquarie St, Barton ACT 2600",
+       "Unit 189/260 City walk, Canberra ACT 2601",
+       "the kebab place",
        "i don't know the address")
 emend_clean_address(x, chat = chat)
-#> [1] "68/150 Acton Rd, Acton ACT 2601"       
-#> [2] "655 Jackson St, Dickson ACT 2602"      
-#> [3] "INVALID ADDRESS"                       
-#> [4] "23/100 De Burgh Rd, Southbank VIC 7800"
-#> [5] "INVALID ADDRESS"                       
-#> [6] "INVALID ADDRESS"
+#> [1] "154 University Ave, Acton ACT 2601"  
+#> [2] "76/2 Cape St, Dickson ACT 2602"      
+#> [3] "4/96 Bunda St, Canberra ACT 2601"    
+#> [4] "11 E Row, Canberra ACT 2601"         
+#> [5] "173/46 Macquarie St, Barton ACT 2600"
+#> [6] "189/260 City Walk, Canberra ACT 2601"
+#> [7] "INVALID ADDRESS"                     
+#> [8] "INVALID ADDRESS"
 ```
 
 ## Related packages

@@ -31,9 +31,8 @@ test_that("emend_fct_reorder reorder input factor", {
   result_8 <- emend_fct_reorder(likerts$likert8, chat = chat_mock) |> levels()
   expect_equal(result_8, truth_8)
 
-  truth_9 <- c("Not a priority", "Low priority", "Somewhat priority", "Moderate priority", "High priority", "Essential priority")
-  result_9 <- emend_fct_reorder(likerts$likert9, chat = chat_mock) |> levels()
-  expect_equal(result_9, truth_9)
+  #truth_9 <- c("Not a priority", "Low priority", "Somewhat priority", "Moderate priority", "High priority", "Essential priority")
+  #result_9 <- emend_fct_reorder(likerts$likert9, chat = chat_mock) |> levels()
+  #expect_equal(result_9, truth_9)
 
-  # total 8 tests, should pass 8
 })

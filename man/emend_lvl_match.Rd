@@ -24,6 +24,3 @@ emend_lvl_match(messy$country,
                 chat = chat)
 
 }
-\seealso{
-\code{\link[=emend_lvl_sweep]{emend_lvl_sweep()}}
-}

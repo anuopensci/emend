@@ -4,7 +4,6 @@
 #' @param levels The levels of the factor.
 #' @param chat The chat object defined by ellmer.
 #'
-#' @seealso [emend_lvl_sweep()]
 #' @examples
 #' chat <- ellmer::chat_ollama(model = "llama3.1:8b", seed = 0, echo = "none")
 #' emend_lvl_match(messy$country,
@@ -107,7 +106,8 @@ reorder_by_llm <- function(lvls, chat = NULL) {
       "Return score only."
     )
   )
-
+  
+  chat$clone()
   chat$set_turns(list())
 
   senti_scores <- lapply(lvls, function(x) {
