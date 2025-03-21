@@ -4,7 +4,7 @@
 \alias{emend_clean_address}
 \title{Standardise address format}
 \usage{
-emend_clean_address(address_vector, chat = NULL)
+emend_clean_address(address_vector, chat = get_default_chat())
 }
 \arguments{
 \item{address_vector}{A character vector that is assumed to be addresses.}

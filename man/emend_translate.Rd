@@ -4,7 +4,7 @@
 \alias{emend_translate}
 \title{Translate text from one language to another.}
 \usage{
-emend_translate(text, to = "English", chat = NULL)
+emend_translate(text, to = "English", chat = get_default_chat())
 }
 \arguments{
 \item{text}{The text to translate.}

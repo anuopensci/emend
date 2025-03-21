@@ -4,7 +4,7 @@
 \alias{emend_clean_date}
 \title{Standardise date format}
 \usage{
-emend_clean_date(dates_vector, chat = NULL)
+emend_clean_date(dates_vector, chat = get_default_chat())
 }
 \arguments{
 \item{dates_vector}{A character vector that is assumed to be dates.}

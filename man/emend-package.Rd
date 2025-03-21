@@ -4,7 +4,7 @@
 \name{emend-package}
 \alias{emend}
 \alias{emend-package}
-\title{emend: Cleaning text data with an AI assistant}
+\title{emend: Cleaning Text Data with an AI Assistant}
 \description{
 The package provides a simple interface to use the large language models to clean text data.
 }

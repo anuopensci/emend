@@ -19,12 +19,14 @@
 #' emend_clean_address(x, chat = chat)
 #'
 #' @export
-emend_clean_address <- function(address_vector, chat = NULL){
+emend_clean_address <- function(address_vector, chat = get_default_chat()){
 
   if (!is.character(address_vector)) {rlang::abort("Input must be a character vector.")}
   if (is.null(chat)) {rlang::abort("Please provide the chat environment.")}
 
-  chat$set_system_prompt(paste0(
+  chat_clone <- chat$clone(deep = TRUE)
+  
+  chat_clone$set_system_prompt(paste0(
     "You are an expert in address formatting. \n",
     "Your task is to standardize addresses into the following format: \n",
     "**Unit/House Number, Street Name, Suburb, State Abbreviation, Postcode** \n",
@@ -48,17 +50,13 @@ emend_clean_address <- function(address_vector, chat = NULL){
     "- Return output only, no explanation or comment. \n"
   ))
 
-  chat$set_turns(list())
-
   converted <- lapply(address_vector, function(x) {
-    response <- chat$chat(paste0(
-      "Now process: ", x
+    chat_clone2 <- chat_clone$clone(deep = TRUE)
+    response <- chat_clone2$chat(paste0(
+      "Now standardize: ", x
     ))
     return(response)
   })
 
   return(unlist(converted))
 }
-
-
-

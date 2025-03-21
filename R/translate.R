@@ -9,23 +9,22 @@
 #' emend_translate(c("猿も木から落ちる", "你好", "bon appetit"), chat = chat)
 #'
 #' @export
-emend_translate <- function(text, to = "English", chat = NULL) {
+emend_translate <- function(text, to = "English", chat = get_default_chat()) {
+  if (!is.character(text)) {rlang::abort("Input must be a character vector.")}
+  if (is.null(chat)) {rlang::abort("Please provide the chat environment.")}
 
-  if (!is.character(text)) {
-    rlang::abort("Input must be a character vector.")
-  }
-
-  if (is.null(chat)) {
-    rlang::abort("Please provide the chat environment.")
-  }
-
-  chat$clone()
-  chat$set_turns(list())
-
+  chat_clone <- chat$clone(deep = TRUE)
+  
+  chat_clone$set_system_prompt(paste0(
+    "You are a translating assistant. ",
+    "Your task is to translate the input to", to, ". ",
+    "Output translated text only, no explanation or comment. "
+  ))
+  
   translated <- lapply(text, function(x){
-    response <- chat$chat(paste0(
-      "For '", x, "' translate it to ", to, ". ",
-      "Return translated text only, no explanation or comment."
+    chat_clone2 <- chat_clone$clone(deep = TRUE)
+    response <- chat_clone2$chat(paste0(
+      "Input: ", x
     ))
     return(response)
   })
@@ -43,23 +42,23 @@ emend_translate <- function(text, to = "English", chat = NULL) {
 #' emend_what_language(c("猿も木から落ちる", "你好", "bon appetit"), chat = chat)
 #'
 #' @export
-emend_what_language <- function(text, chat = NULL) {
+emend_what_language <- function(text, chat = get_default_chat()) {
+  if (!is.character(text)) {rlang::abort("Input must be a character vector.")}
+  if (is.null(chat)) {rlang::abort("Please provide the chat environment.")}
 
-  if (!is.character(text)) {
-    rlang::abort("Input must be a character vector.")
-  }
-
-  if (is.null(chat)) {
-    rlang::abort("Please provide the chat environment.")
-  }
-
-  chat$clone()
-  chat$set_turns(list())
-
+  chat_clone <- chat$clone(deep = TRUE)
+  
+  chat_clone$set_system_prompt(paste0(
+    "You are a translating assistant. ", 
+    "Identify what language the input is. ",
+    "Output language name only, no explanation or comment. "
+  ))
+  
   language_types <- lapply(text, function(x){
-    response <- chat$chat(paste0(
-      "For '", x, "' identify which language it is. ",
-      "Return language type only, no explanation or comment."
+    chat_clone2 <- chat_clone$clone(deep = TRUE)
+    
+    response <- chat_clone2$chat(paste0(
+      "Input: ", x
     ))
     return(response)
   })

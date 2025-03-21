@@ -4,7 +4,7 @@
 \alias{emend_fct_match}
 \title{Match input factor to specified levels.}
 \usage{
-emend_fct_match(.f, levels = NULL, chat = NULL)
+emend_fct_match(.f, levels = NULL, chat = get_default_chat())
 }
 \arguments{
 \item{.f}{A factor.}

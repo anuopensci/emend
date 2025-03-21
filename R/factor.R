@@ -12,14 +12,16 @@
 #'                 chat = chat)
 #'
 #' @export
-emend_lvl_match <- function(.f, levels = NULL, chat = NULL) {
+emend_lvl_match <- function(.f, levels = NULL, chat = get_default_chat()) {
   if(is.null(levels)) cli::cli_abort("Please provide the levels of the factor.")
   if(is.null(chat)) cli::cli_abort("Please provide the chat object.")
 
   lvls_unmatched <- setdiff(unique(.f), levels)
   lvls_intersect <- intersect(unique(.f), levels)
 
-  chat$set_system_prompt(paste0(
+  chat_clone <- chat$clone(deep = TRUE)
+  
+  chat_clone$set_system_prompt(paste0(
     "You are a data cleaning assistant specializing in correcting categorical data. The correct categorical levels are: ",
     paste(levels, collapse = ", "), ". ",
     "Your task is to: ",
@@ -29,10 +31,9 @@ emend_lvl_match <- function(.f, levels = NULL, chat = NULL) {
     "Respond with only the corrected category name without additional explanations."
   ))
 
-  chat$set_turns(list())
-
   matched <- lapply(lvls_unmatched, function(x) {
-    chat$chat(paste0(
+    chat_clone2 <- chat_clone$clone(deep = TRUE)
+    chat_clone2$chat(paste0(
       "Now process: ", x
     ))
   })
@@ -71,7 +72,7 @@ print.emend_lvl_match <- function(x, ...) {
 #' emend_fct_match(messy$country, levels = c("UK", "USA", "Canada", "Australia", "NZ"), chat = chat)
 #'
 #' @export
-emend_fct_match <- function(.f, levels = NULL, chat = NULL) {
+emend_fct_match <- function(.f, levels = NULL, chat = get_default_chat()) {
   dict <- emend_lvl_match(.f, levels, chat)
   factor(unname(unclass(dict)[.f]), levels = levels)
 }
@@ -85,7 +86,7 @@ emend_fct_match <- function(.f, levels = NULL, chat = NULL) {
 #' emend_fct_reorder(likerts$likert1, chat = chat) |> levels()
 #'
 #' @export
-emend_fct_reorder <- function(.f, chat = NULL) {
+emend_fct_reorder <- function(.f, chat = get_default_chat()) {
   if(is.null(.f)) cli::cli_abort("Please provide the input vector or factor.")
   if(!is.character(.f) && !is.factor(.f)) cli::cli_abort("Input must be a charactor vector or a factor.")
   if(is.null(chat)) cli::cli_abort("Please provide the chat object.")
@@ -95,9 +96,10 @@ emend_fct_reorder <- function(.f, chat = NULL) {
 }
 
 # reorder_3 replace function
-reorder_by_llm <- function(lvls, chat = NULL) {
+reorder_by_llm <- function(lvls, chat = get_default_chat()) {
+  chat_clone <- chat$clone(deep = TRUE)
 
-  chat$set_system_prompt(
+  chat_clone$set_system_prompt(
     paste0(
       "You are a sentiment analysis model. Your task is to analyze the sentiment of the input sentence and provide a sentiment score. ",
       "The score should be a numerical value between -100 and 100, where: ",
@@ -107,11 +109,8 @@ reorder_by_llm <- function(lvls, chat = NULL) {
     )
   )
   
-  chat$clone()
-  chat$set_turns(list())
-
   senti_scores <- lapply(lvls, function(x) {
-    chat$chat(paste0(
+    chat_clone$chat(paste0(
       "Now process: ", x
     ))
   })
@@ -135,15 +134,17 @@ reorder_by_llm <- function(lvls, chat = NULL) {
 #'
 #' @examples
 #' chat <- ellmer::chat_ollama(model = "llama3.1:8b", seed = 0, echo = "none")
-#' emend_get_levels(messy$country, chat = chat)
+#' emend_lvl_unique(messy$country, chat = chat)
 #'
 #' @export
-emend_get_levels <- function(.f, chat = NULL){
+emend_lvl_unique <- function(.f, chat = get_default_chat()){
   if(is.null(.f)) cli::cli_abort("Please provide the input vector or factor.")
   if(!is.character(.f) && !is.factor(.f)) cli::cli_abort("Input must be a charactor vector or a factor.")
   if(is.null(chat)) cli::cli_abort("Please provide the chat environment.")
 
-  chat$set_system_prompt(paste0(
+  chat_clone <- chat$clone(deep = TRUE)
+  
+  chat_clone$set_system_prompt(paste0(
     "You are a data cleaning assistant specializing in standardizing categorical data. ",
     "You will be given a list of messy names that may contain typos, abbreviations, or inconsistencies. ",
     "Your task is to: ",
@@ -160,11 +161,9 @@ emend_get_levels <- function(.f, chat = NULL){
     "* The categories are standardized and free of inconsistencies."
   ))
 
-  chat$set_turns(list())
-
   origin_levels <- unique(.f)
 
-  llm_out <- chat$chat(paste0(
+  llm_out <- chat_clone$chat(paste0(
     "Now process: ",
     paste(origin_levels, collapse = ", "), "."
   ))

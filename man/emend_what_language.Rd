@@ -4,7 +4,7 @@
 \alias{emend_what_language}
 \title{Identify the language in the text.}
 \usage{
-emend_what_language(text, chat = NULL)
+emend_what_language(text, chat = get_default_chat())
 }
 \arguments{
 \item{text}{A string or a factor that contains text information.}

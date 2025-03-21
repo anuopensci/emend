@@ -4,7 +4,7 @@
 \alias{emend_fct_reorder}
 \title{Reorder the levels of the input factor in a meaningful way.}
 \usage{
-emend_fct_reorder(.f, chat = NULL)
+emend_fct_reorder(.f, chat = get_default_chat())
 }
 \arguments{
 \item{.f}{A vector of characters or a factor.}

@@ -12,24 +12,24 @@
 #' emend_clean_date(x, chat = chat)
 #'
 #' @export
-emend_clean_date <- function(dates_vector, chat = NULL) {
+emend_clean_date <- function(dates_vector, chat = get_default_chat()) {
 
   if (!is.character(dates_vector)) {rlang::abort("Input must be a character vector.")}
   if (is.null(chat)) {rlang::abort("Please provide the chat environment.")}
 
-  chat$set_system_prompt(paste0(
-    "You are an expert in data cleaning and standardization. ",
+  chat_clone <- chat$clone(deep = TRUE)
+  
+  chat_clone$set_system_prompt(paste0(
+    "You are a date formatting assistant. ",
     "Your task is to identify and parse dates in various formats, then convert them into the standard 'YYYY-MM-DD' format. ",
     "If a string is not a recognizable date, return 'INVALID'. ",
     "Always ensure correct parsing, considering different date formats such as 'DD/MM/YYYY', 'Month DD, YYYY', 'YYYY-MM-DD', 'DD Mon YYYY', and similar variations. ",
     "Output result only."
   ))
 
-  chat$clone()
-  chat$set_turns(list())
-
   converted <- lapply(dates_vector, function(x) {
-    response <- chat$chat(paste0(
+    chat_clone2 <- chat_clone$clone(deep = TRUE)
+    response <- chat_clone2$chat(paste0(
       "Standardize this date: ", x
     ))
     return(response)

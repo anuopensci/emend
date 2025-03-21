@@ -4,7 +4,7 @@
 \alias{emend_lvl_match}
 \title{Match the input factor to supplied levels.}
 \usage{
-emend_lvl_match(.f, levels = NULL, chat = NULL)
+emend_lvl_match(.f, levels = NULL, chat = get_default_chat())
 }
 \arguments{
 \item{.f}{A vector of characters or a factor.}
