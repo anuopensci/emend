@@ -3,6 +3,8 @@
 #' @param .f A vector of characters or a factor.
 #' @param levels The levels of the factor.
 #' @param chat The chat object defined by ellmer.
+#' @return A named character vector of standardised category labels, with the class `"emend_lvl_match"`. 
+#' The names correspond to the original messy categories, and the values are the cleaned versions.
 #'
 #' @examples
 #' chat <- ellmer::chat_ollama(model = "llama3.1:8b", seed = 0, echo = "none")
@@ -80,6 +82,7 @@ emend_fct_match <- function(.f, levels = NULL, chat = get_default_chat()) {
 #' Reorder the levels of the input factor in a meaningful way.
 #' @param .f A vector of characters or a factor.
 #' @param chat A chat object defined by ellmer.
+#' @return A factor with standardized category labels.
 #'
 #' @examples
 #' chat <- ellmer::chat_ollama(model = "llama3.1:8b", seed = 0, echo = "none")
@@ -131,6 +134,7 @@ reorder_by_llm <- function(lvls, chat = get_default_chat()) {
 #'
 #' @param .f A vector of characters or a factor.
 #' @param chat A chat object defined by ellmer.
+#' @return A character vector of standardised category names.
 #'
 #' @examples
 #' chat <- ellmer::chat_ollama(model = "llama3.1:8b", seed = 0, echo = "none")

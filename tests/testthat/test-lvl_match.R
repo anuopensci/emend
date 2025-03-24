@@ -1,4 +1,5 @@
 test_that("emend_lvl_match match messy data to correct levels", {
+  skip_if_not(system2("which", "ollama", stdout = TRUE) != "")
   chat_mock <- ellmer::chat_ollama(model = "llama3.1:8b", seed = 0, echo = "none")
 
   dict_1 <- setNames(c(c("Europe", "North America", "North America", "Europe", "North America", "Oceania", "Oceania", "Oceania"), c()),

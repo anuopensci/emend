@@ -4,7 +4,11 @@ Version: 0.0.0.9000
 Authors@R: 
     c(person(given = "Emi", family = "Tanaka", email = "dr.emi.tanaka@gmail.com", role = c("aut", "cre", "cph"), comment = c(ORCID = "0000-0002-1455-259X")),
       person(given = "Jiajia", family = "Li", email = "lijia970324@gmail.com", role = c("aut"), comment = c(ORCID = "0009-0003-7143-9336")))
-Description: The package provides a simple interface to use the large language models to clean text data. 
+Description: 
+    Provides functions to clean and standardize messy data, including textual categories and free-text addresses, 
+    using Large Language Models (LLMs). The package corrects typos, expands abbreviations, 
+    and maps inconsistent entries to standardized values. Ideal for bioinformatics, business, 
+    and general data cleaning tasks.
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)

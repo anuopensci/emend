@@ -1,4 +1,5 @@
 test_that("emend_fct_match map messy data to correct levels", {
+  skip_if_not(system2("which", "ollama", stdout = TRUE) != "")
   chat_mock <- ellmer::chat_ollama(model = "llama3.1:8b", seed = 0, echo = "none")
 
   truth_1 <- factor(c("UK", "USA", "Canada", "UK", "USA", "Canada", "UK", "USA", "NZ",

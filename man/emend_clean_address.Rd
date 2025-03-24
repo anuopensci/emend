@@ -11,6 +11,9 @@ emend_clean_address(address_vector, chat = get_default_chat())
 
 \item{chat}{A chat object defined by ellmer.}
 }
+\value{
+A character vector with converted addresses.
+}
 \description{
 This function standardise inconsistent address formats to a standard format.
 }

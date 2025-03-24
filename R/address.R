@@ -4,6 +4,7 @@
 #'
 #' @param address_vector A character vector that is assumed to be addresses.
 #' @param chat A chat object defined by ellmer.
+#' @return A character vector with converted addresses. 
 #'
 #' @examples
 #' # Convert a vector of inconsistent formatted address to a standard format

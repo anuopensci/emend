@@ -1,4 +1,5 @@
 test_that("date cleaning works", {
+  skip_if_not(system2("which", "ollama", stdout = TRUE) != "")
   chat_mock <- ellmer::chat_ollama(model = "llama3.1:8b", seed = 0, echo = "none")
 
   input_1 <- c("16/02/1997", "24 Mar 2022", "2000-01-01", "Jason", "Dec 25, 2006", "12/05/2024")

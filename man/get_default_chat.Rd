@@ -6,6 +6,9 @@
 \usage{
 get_default_chat()
 }
+\value{
+A Chat object.
+}
 \description{
 Get or create the default chat object
 }

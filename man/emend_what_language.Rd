@@ -11,6 +11,9 @@ emend_what_language(text, chat = get_default_chat())
 
 \item{chat}{A chat object defined by ellmer}
 }
+\value{
+A character vector of language names.
+}
 \description{
 Identify the language in the text.
 }

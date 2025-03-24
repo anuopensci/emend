@@ -4,6 +4,7 @@
 #'
 #' @param dates_vector A character vector that is assumed to be dates.
 #' @param chat A chat object defined by ellmer.
+#' @return A vector of Date objects. 
 #'
 #' @examples
 #' x <- c("16/02/1997", "20 November 2024", "24 Mar 2022", "2000-01-01", "Jason", 

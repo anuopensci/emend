@@ -13,6 +13,9 @@ emend_translate(text, to = "English", chat = get_default_chat())
 
 \item{chat}{An ellmer Chat object.}
 }
+\value{
+A character vector of translated text.
+}
 \description{
 Translate text from one language to another.
 }

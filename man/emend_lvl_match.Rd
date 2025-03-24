@@ -13,6 +13,10 @@ emend_lvl_match(.f, levels = NULL, chat = get_default_chat())
 
 \item{chat}{The chat object defined by ellmer.}
 }
+\value{
+A named character vector of standardised category labels, with the class \code{"emend_lvl_match"}.
+The names correspond to the original messy categories, and the values are the cleaned versions.
+}
 \description{
 Match the input factor to supplied levels.
 }

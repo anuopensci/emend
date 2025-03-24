@@ -11,6 +11,9 @@ emend_fct_reorder(.f, chat = get_default_chat())
 
 \item{chat}{A chat object defined by ellmer.}
 }
+\value{
+A factor with standardized category labels.
+}
 \description{
 Reorder the levels of the input factor in a meaningful way.
 }

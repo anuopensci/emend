@@ -16,6 +16,9 @@ emend_lvl_unique(.f, chat = get_default_chat())
 
 \item{chat}{A chat object defined by ellmer.}
 }
+\value{
+A character vector of standardised category names.
+}
 \description{
 Get the unique levels of messy categorical data
 The returned value is a vector.

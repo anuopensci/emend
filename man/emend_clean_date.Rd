@@ -11,6 +11,9 @@ emend_clean_date(dates_vector, chat = get_default_chat())
 
 \item{chat}{A chat object defined by ellmer.}
 }
+\value{
+A vector of Date objects.
+}
 \description{
 This function standardise inconsistent date formats.
 }

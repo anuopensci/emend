@@ -3,6 +3,7 @@
 #' @param text The text to translate.
 #' @param to The language to translate to. The default is "English".
 #' @param chat An ellmer Chat object.
+#' @return A character vector of translated text.
 #'
 #' @examples
 #' chat <- ellmer::chat_ollama(model = "llama3.1:8b", seed = 0, echo = "none")
@@ -36,6 +37,7 @@ emend_translate <- function(text, to = "English", chat = get_default_chat()) {
 #' Identify the language in the text.
 #' @param text A string or a factor that contains text information.
 #' @param chat A chat object defined by ellmer
+#' @return A character vector of language names. 
 #'
 #' @examples
 #' chat <- ellmer::chat_ollama(model = "llama3.1:8b", seed = 0, echo = "none")
