@@ -7,10 +7,12 @@
 #' @return A vector of Date objects. 
 #'
 #' @examples
+#' \donttest{
 #' x <- c("16/02/1997", "20 November 2024", "24 Mar 2022", "2000-01-01", "Jason", 
 #'        "Dec 25, 2030", "11/05/2024", "March 10, 1999")
 #' chat <- ellmer::chat_ollama(model = "llama3.1:8b", seed = 0, echo = "none")
 #' emend_clean_date(x, chat = chat)
+#' }
 #'
 #' @export
 emend_clean_date <- function(dates_vector, chat = get_default_chat()) {

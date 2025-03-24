@@ -18,7 +18,9 @@ A character vector of language names.
 Identify the language in the text.
 }
 \examples{
+\donttest{
 chat <- ellmer::chat_ollama(model = "llama3.1:8b", seed = 0, echo = "none")
 emend_what_language(c("猿も木から落ちる", "你好", "bon appetit"), chat = chat)
+}
 
 }

@@ -7,12 +7,14 @@
 #' The names correspond to the original messy categories, and the values are the cleaned versions.
 #'
 #' @examples
+#' \donttest{
 #' chat <- ellmer::chat_ollama(model = "llama3.1:8b", seed = 0, echo = "none")
 #' emend_lvl_match(messy$country,
 #'                 levels = c("Asia", "Europe", "North America", "Oceania",
 #'                            "South America"),
 #'                 chat = chat)
-#'
+#' }
+#' 
 #' @export
 emend_lvl_match <- function(.f, levels = NULL, chat = get_default_chat()) {
   if(is.null(levels)) cli::cli_abort("Please provide the levels of the factor.")
@@ -70,9 +72,11 @@ print.emend_lvl_match <- function(x, ...) {
 #' @param chat A chat object defined by ellmer.
 #'
 #' @examples
+#' \donttest{
 #' chat <- ellmer::chat_ollama(model = "llama3.1:8b", seed = 0, echo = "none")
 #' emend_fct_match(messy$country, levels = c("UK", "USA", "Canada", "Australia", "NZ"), chat = chat)
-#'
+#' }
+#' 
 #' @export
 emend_fct_match <- function(.f, levels = NULL, chat = get_default_chat()) {
   dict <- emend_lvl_match(.f, levels, chat)
@@ -85,9 +89,11 @@ emend_fct_match <- function(.f, levels = NULL, chat = get_default_chat()) {
 #' @return A factor with standardized category labels.
 #'
 #' @examples
+#' \donttest{
 #' chat <- ellmer::chat_ollama(model = "llama3.1:8b", seed = 0, echo = "none")
 #' emend_fct_reorder(likerts$likert1, chat = chat) |> levels()
-#'
+#' }
+#' 
 #' @export
 emend_fct_reorder <- function(.f, chat = get_default_chat()) {
   if(is.null(.f)) cli::cli_abort("Please provide the input vector or factor.")
@@ -137,9 +143,12 @@ reorder_by_llm <- function(lvls, chat = get_default_chat()) {
 #' @return A character vector of standardised category names.
 #'
 #' @examples
+#' \donttest{
+#' options(ellmer_timeout_s = 3600) 
 #' chat <- ellmer::chat_ollama(model = "llama3.1:8b", seed = 0, echo = "none")
 #' emend_lvl_unique(messy$country, chat = chat)
-#'
+#' }
+#' 
 #' @export
 emend_lvl_unique <- function(.f, chat = get_default_chat()){
   if(is.null(.f)) cli::cli_abort("Please provide the input vector or factor.")

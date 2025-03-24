@@ -18,7 +18,9 @@ A factor with standardized category labels.
 Reorder the levels of the input factor in a meaningful way.
 }
 \examples{
+\donttest{
 chat <- ellmer::chat_ollama(model = "llama3.1:8b", seed = 0, echo = "none")
 emend_fct_reorder(likerts$likert1, chat = chat) |> levels()
+}
 
 }

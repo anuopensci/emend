@@ -5,10 +5,7 @@ Authors@R:
     c(person(given = "Emi", family = "Tanaka", email = "dr.emi.tanaka@gmail.com", role = c("aut", "cre", "cph"), comment = c(ORCID = "0000-0002-1455-259X")),
       person(given = "Jiajia", family = "Li", email = "lijia970324@gmail.com", role = c("aut"), comment = c(ORCID = "0009-0003-7143-9336")))
 Description: 
-    Provides functions to clean and standardize messy data, including textual categories and free-text addresses, 
-    using Large Language Models (LLMs). The package corrects typos, expands abbreviations, 
-    and maps inconsistent entries to standardized values. Ideal for bioinformatics, business, 
-    and general data cleaning tasks.
+    Provides functions to clean and standardize messy data, including textual categories and free-text addresses, using Large Language Models (LLMs). The package corrects typos, expands abbreviations, and maps inconsistent entries to standardized values. Ideal for bioinformatics, business, and general data cleaning tasks.
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
@@ -19,13 +16,13 @@ Imports:
     rlang,
     ellmer
 Depends: 
-    R (>= 2.10)
+    R (>= 3.5.0)
 LazyData: true
 Suggests: 
     knitr,
     rmarkdown,
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
-URL: https://github.com/emitanaka/emend, http://emitanaka.org/emend/
+URL: https://github.com/emitanaka/emend, https://emitanaka.org/emend/
 BugReports: https://github.com/emitanaka/emend/issues
 VignetteBuilder: knitr

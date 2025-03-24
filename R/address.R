@@ -7,7 +7,9 @@
 #' @return A character vector with converted addresses. 
 #'
 #' @examples
+#' \donttest{
 #' # Convert a vector of inconsistent formatted address to a standard format
+#' options(ellmer_timeout_s = 3600) 
 #' x <- c("154 university avenue, acton act 2601",
 #'        "76/2 Cape Street, Dickson ACT 2602",
 #'        "Shop 4/96 Bunda St, Canberra ACT 2601",
@@ -18,7 +20,8 @@
 #'        "i don't know the address")
 #' chat <- ellmer::chat_ollama(model = "llama3.1:8b", seed = 0, echo = "none")
 #' emend_clean_address(x, chat = chat)
-#'
+#' } 
+#' 
 #' @export
 emend_clean_address <- function(address_vector, chat = get_default_chat()){
 

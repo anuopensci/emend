@@ -53,12 +53,11 @@ The vendors listed in the table below uses cloud computing to run a LLM. You wil
 
 Vendor | Vendor code | Environment variable name | API Documentaton | Implemented
 ---|---|---|:---:| ---|
-[OpenAI](https://platform.openai.com/api-keys) | `openai` | `OPENAI_API_KEY` | [Link](https://platform.openai.com/docs/api-reference/introduction) | Yes |
+OpenAI | `openai` | `OPENAI_API_KEY` | - | Yes |
 [Mistral AI](https://console.mistral.ai/api-keys/) | `mistral` | `MISTRAL_API_KEY` | | No |
 [Anthropic](https://console.anthropic.com/settings/keys) | `anthropic` | `ANTHROPIC_API_KEY` || No |
 Hungging Face | `huggingface` | `HUGGINGFACE_API_KEY` | [Link](https://huggingface.co/docs/hub/models-inference) | No |
 Perplexity | `perplexity` | `PERPLEXITY_API_KEY` | [Link](https://docs.perplexity.ai/home) | No |
-
 
 The environmental variable will need to be stored in `.Renviron` file located by your R session. The easiest way to find this file is to use `usethis::edit_r_environ()` which should open this file. In this file you will need to enter your key like below.
 

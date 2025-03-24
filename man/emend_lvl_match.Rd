@@ -21,10 +21,12 @@ The names correspond to the original messy categories, and the values are the cl
 Match the input factor to supplied levels.
 }
 \examples{
+\donttest{
 chat <- ellmer::chat_ollama(model = "llama3.1:8b", seed = 0, echo = "none")
 emend_lvl_match(messy$country,
                 levels = c("Asia", "Europe", "North America", "Oceania",
                            "South America"),
                 chat = chat)
+}
 
 }

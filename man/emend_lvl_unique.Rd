@@ -28,7 +28,10 @@ Double check if the output from LLM is true to your data.
 This function is generally suitable for categories, not working well with sentences and too many categories.
 }
 \examples{
+\donttest{
+options(ellmer_timeout_s = 3600) 
 chat <- ellmer::chat_ollama(model = "llama3.1:8b", seed = 0, echo = "none")
 emend_lvl_unique(messy$country, chat = chat)
+}
 
 }

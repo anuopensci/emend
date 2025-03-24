@@ -83,7 +83,7 @@ emend_lvl_match(messy$country, levels = c("Asia", "Europe", "North America", "Oc
 The above process required specification of all the levels but sometimes you may not know ahead all of the levels. The `emend_get_levels()` function will attempt to clean up the levels. 
 
 ```{r}
-levels <- emend_get_levels(messy$country, chat = chat)
+levels <- emend_lvl_unique(messy$country, chat = chat)
 print(levels)
 ```
 Then you can use the cleaned levels to map the messy data to the correct levels.
