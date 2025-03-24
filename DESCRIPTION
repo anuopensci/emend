@@ -1,6 +1,6 @@
 Package: emend
 Title: Cleaning Text Data with an AI Assistant
-Version: 0.0.0.9000
+Version: 0.1.0
 Authors@R: 
     c(person(given = "Emi", family = "Tanaka", email = "dr.emi.tanaka@gmail.com", role = c("aut", "cre", "cph"), comment = c(ORCID = "0000-0002-1455-259X")),
       person(given = "Jiajia", family = "Li", email = "lijia970324@gmail.com", role = c("aut"), comment = c(ORCID = "0009-0003-7143-9336")))
