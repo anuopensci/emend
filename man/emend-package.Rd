@@ -6,7 +6,7 @@
 \alias{emend-package}
 \title{emend: Cleaning Text Data with an AI Assistant}
 \description{
-Provides functions to clean and standardize messy data, including textual categories and free-text addresses, using Large Language Models (LLMs). The package corrects typos, expands abbreviations, and maps inconsistent entries to standardized values. Ideal for bioinformatics, business, and general data cleaning tasks.
+Provides functions to clean and standardize messy data, including textual categories and free-text addresses, using Large Language Models. The package corrects typos, expands abbreviations, and maps inconsistent entries to standardized values. Ideal for Bioinformatics, business, and general data cleaning tasks.
 }
 \seealso{
 Useful links:

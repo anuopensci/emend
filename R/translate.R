@@ -8,7 +8,8 @@
 #' @examples
 #' \donttest{
 #' chat <- ellmer::chat_ollama(model = "llama3.1:8b", seed = 0, echo = "none")
-#' emend_translate(c("猿も木から落ちる", "你好", "bon appetit"), chat = chat)
+#' emend_translate(c("\u733F\u3082\u6728\u304B\u3089\u843D\u3061\u308B", 
+#'                   "\u4F60\u597D", "bon appetit"), chat = chat)
 #' }
 #' 
 #' @export
@@ -44,7 +45,8 @@ emend_translate <- function(text, to = "English", chat = get_default_chat()) {
 #' @examples
 #' \donttest{
 #' chat <- ellmer::chat_ollama(model = "llama3.1:8b", seed = 0, echo = "none")
-#' emend_what_language(c("猿も木から落ちる", "你好", "bon appetit"), chat = chat)
+#' emend_what_language(c("\u733F\u3082\u6728\u304B\u3089\u843D\u3061\u308B", 
+#'                       "\u4F60\u597D", "bon appetit"), chat = chat)
 #' }
 #' 
 #' @export
