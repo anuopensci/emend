@@ -1,4 +1,4 @@
-url: https://emitanaka.org/emend
+url: https://anuopensci.github.io/emend/
 template:
   bootstrap: 5
   bootswatch: sandstone
@@ -18,10 +18,10 @@ reference:
   - emend_clean_date
 - title: Address standardisation
   contents:
-  - emend_clean_address 
+  - emend_clean_address
 - title: Model settings and options
   contents:
-  - get_default_chat 
+  - get_default_chat
 - title: Datasets
   contents:
   - airbnb_listings
