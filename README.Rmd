@@ -29,10 +29,17 @@ The default setting has been set so that the results are reproducible and less p
 
 ### Package
 
-You can install the development version of emend like below:
+You can install emend from CRAN like below:
 
 ```{r, eval=FALSE}
 install.packages("emend")
+```
+
+You can install the development version of emend from GitHub like below:
+
+```{r, eval=FALSE}
+# install.packages("pak")
+pak::pak("anuopensci/emend")
 ```
 
 ## Examples

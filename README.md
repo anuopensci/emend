@@ -25,10 +25,17 @@ and not necessarily across different systems.
 
 ### Package
 
-You can install the development version of emend like below:
+You can install emend from CRAN like below:
 
 ``` r
 install.packages("emend")
+```
+
+You can install the development version of emend from GitHub like below:
+
+``` r
+# install.packages("pak")
+pak::pak("anuopensci/emend")
 ```
 
 ## Examples
@@ -189,7 +196,7 @@ languages.
 text <- c("猿も木から落ちる", "你好", "bon appetit")
 emend_translate(text, chat = chat)
 #> [1] "Even monkeys fall from trees." "Hello."                       
-#> [3] "Good appetite."
+#> [3] "Enjoy your meal."
 ```
 
 You can also try to identify the language in the text.

@@ -12,7 +12,7 @@ Provides functions to clean and standardize messy data, including textual catego
 Useful links:
 \itemize{
   \item \url{https://github.com/anuopensci/emend}
-  \item \url{https://emitanaka.org/emend/}
+  \item \url{https://anuopensci.github.io/emend/}
   \item Report bugs at \url{https://github.com/anuopensci/emend/issues}
 }
 
