@@ -23,19 +23,12 @@ and not necessarily across different systems.
 
 ## Installation
 
-### Large Language Model
-
-You will also need to set up a large language model (LLM), either by
-downloading a local LLM via Ollama or API access. To do this see
-[`vignette("setup-LLM", package = "emend")`](https://emitanaka.org/emend/articles/setup-LLM.html).
-
 ### Package
 
 You can install the development version of emend like below:
 
 ``` r
-# install.packages("pak")
-pak::pak("emitanaka/emend")
+install.packages("emend")
 ```
 
 ## Examples
@@ -50,7 +43,7 @@ Before using any functions in `emend`, you need to set up a “Chat”
 object which is from the package `ellmer`, then use this “Chat” object
 as an input argument for functions in `emend`.
 
-**If you have set up a local LLM using Ollama:**
+**If you have set up a local LLM using [Ollama](https://ollama.com/):**
 
 You could run the below code to set up your `Chat` object. Our function
 is tested with the LLM `llama3.1:8b` and with a seed of 0, so these will
@@ -196,7 +189,7 @@ languages.
 text <- c("猿も木から落ちる", "你好", "bon appetit")
 emend_translate(text, chat = chat)
 #> [1] "Even monkeys fall from trees." "Hello."                       
-#> [3] "Enjoy your meal."
+#> [3] "Good appetite."
 ```
 
 You can also try to identify the language in the text.

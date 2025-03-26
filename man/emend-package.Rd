@@ -11,18 +11,18 @@ Provides functions to clean and standardize messy data, including textual catego
 \seealso{
 Useful links:
 \itemize{
-  \item \url{https://github.com/emitanaka/emend}
+  \item \url{https://github.com/anuopensci/emend}
   \item \url{https://emitanaka.org/emend/}
-  \item Report bugs at \url{https://github.com/emitanaka/emend/issues}
+  \item Report bugs at \url{https://github.com/anuopensci/emend/issues}
 }
 
 }
 \author{
-\strong{Maintainer}: Emi Tanaka \email{dr.emi.tanaka@gmail.com} (\href{https://orcid.org/0000-0002-1455-259X}{ORCID}) [copyright holder]
+\strong{Maintainer}: Jiajia Li \email{lijia970324@gmail.com} (\href{https://orcid.org/0009-0003-7143-9336}{ORCID})
 
 Authors:
 \itemize{
-  \item Jiajia Li \email{lijia970324@gmail.com} (\href{https://orcid.org/0009-0003-7143-9336}{ORCID})
+  \item Emi Tanaka \email{dr.emi.tanaka@gmail.com} (\href{https://orcid.org/0000-0002-1455-259X}{ORCID}) [copyright holder]
 }
 
 }

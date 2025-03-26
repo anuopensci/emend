@@ -2,8 +2,8 @@ Package: emend
 Title: Cleaning Text Data with an AI Assistant
 Version: 0.1.0
 Authors@R: 
-    c(person(given = "Emi", family = "Tanaka", email = "dr.emi.tanaka@gmail.com", role = c("aut", "cre", "cph"), comment = c(ORCID = "0000-0002-1455-259X")),
-      person(given = "Jiajia", family = "Li", email = "lijia970324@gmail.com", role = c("aut"), comment = c(ORCID = "0009-0003-7143-9336")))
+    c(person(given = "Emi", family = "Tanaka", email = "dr.emi.tanaka@gmail.com", role = c("aut", "cph"), comment = c(ORCID = "0000-0002-1455-259X")),
+      person(given = "Jiajia", family = "Li", email = "lijia970324@gmail.com", role = c("aut", "cre"), comment = c(ORCID = "0009-0003-7143-9336")))
 Description: 
     Provides functions to clean and standardize messy data, including textual categories and free-text addresses, using Large Language Models. The package corrects typos, expands abbreviations, and maps inconsistent entries to standardized values. Ideal for Bioinformatics, business, and general data cleaning tasks.
 License: MIT + file LICENSE
@@ -23,6 +23,6 @@ Suggests:
     rmarkdown,
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
-URL: https://github.com/emitanaka/emend, https://emitanaka.org/emend/
-BugReports: https://github.com/emitanaka/emend/issues
+URL: https://github.com/anuopensci/emend, https://emitanaka.org/emend/
+BugReports: https://github.com/anuopensci/emend/issues
 VignetteBuilder: knitr

@@ -27,17 +27,12 @@ The default setting has been set so that the results are reproducible and less p
 
 ## Installation
 
-### Large Language Model
-
-You will also need to set up a large language model (LLM), either by downloading a local LLM via Ollama or API access. To do this see [`vignette("setup-LLM", package = "emend")`](https://emitanaka.org/emend/articles/setup-LLM.html).
-
 ### Package
 
 You can install the development version of emend like below:
 
 ```{r, eval=FALSE}
-# install.packages("pak")
-pak::pak("emitanaka/emend")
+install.packages("emend")
 ```
 
 ## Examples
@@ -50,7 +45,7 @@ library(emend)
 
 Before using any functions in `emend`, you need to set up a "Chat" object which is from the package `ellmer`, then use this "Chat" object as an input argument for functions in `emend`. 
 
-__If you have set up a local LLM using Ollama:__
+__If you have set up a local LLM using [Ollama](https://ollama.com/):__ 
 
 You could run the below code to set up your `Chat` object. Our function is tested with the LLM `llama3.1:8b` and with a seed of 0, so these will be the preferred parameters. 
 
