@@ -23,6 +23,6 @@ Suggests:
     rmarkdown,
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
-URL: https://github.com/anuopensci/emend, https://emitanaka.org/emend/
+URL: https://github.com/anuopensci/emend, https://anuopensci.github.io/emend/
 BugReports: https://github.com/anuopensci/emend/issues
 VignetteBuilder: knitr
