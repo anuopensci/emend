@@ -13,6 +13,9 @@ emend_fct_match(.f, levels = NULL, chat = get_default_chat())
 
 \item{chat}{A chat object defined by ellmer.}
 }
+\value{
+A factor with levels matching the provided \code{levels} argument.
+}
 \description{
 Match input factor to specified levels.
 }

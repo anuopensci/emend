@@ -2,12 +2,7 @@
 % Please edit documentation in R/factor.R
 \name{emend_lvl_unique}
 \alias{emend_lvl_unique}
-\title{Get the unique levels of messy categorical data
-The returned value is a vector.
-The LLM will return full names instead of abbreviations.
-You can use this functions to clean up your categorical data and obtain unique levels.
-Double check if the output from LLM is true to your data.
-This function is generally suitable for categories, not working well with sentences and too many categories.}
+\title{Get the unique levels of messy categorical data}
 \usage{
 emend_lvl_unique(.f, chat = get_default_chat())
 }
@@ -20,7 +15,6 @@ emend_lvl_unique(.f, chat = get_default_chat())
 A character vector of standardised category names.
 }
 \description{
-Get the unique levels of messy categorical data
 The returned value is a vector.
 The LLM will return full names instead of abbreviations.
 You can use this functions to clean up your categorical data and obtain unique levels.
@@ -29,7 +23,7 @@ This function is generally suitable for categories, not working well with senten
 }
 \examples{
 \donttest{
-options(ellmer_timeout_s = 3600) 
+options(ellmer_timeout_s = 3600)
 chat <- ellmer::chat_ollama(model = "llama3.1:8b", seed = 0, echo = "none")
 emend_lvl_unique(messy$country, chat = chat)
 }

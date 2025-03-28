@@ -3,7 +3,7 @@
 #' @param .f A vector of characters or a factor.
 #' @param levels The levels of the factor.
 #' @param chat The chat object defined by ellmer.
-#' @return A named character vector of standardised category labels, with the class `"emend_lvl_match"`. 
+#' @return A named character vector of standardised category labels, with the class `"emend_lvl_match"`.
 #' The names correspond to the original messy categories, and the values are the cleaned versions.
 #'
 #' @examples
@@ -14,7 +14,7 @@
 #'                            "South America"),
 #'                 chat = chat)
 #' }
-#' 
+#'
 #' @export
 emend_lvl_match <- function(.f, levels = NULL, chat = get_default_chat()) {
   if(is.null(levels)) cli::cli_abort("Please provide the levels of the factor.")
@@ -24,7 +24,7 @@ emend_lvl_match <- function(.f, levels = NULL, chat = get_default_chat()) {
   lvls_intersect <- intersect(unique(.f), levels)
 
   chat_clone <- chat$clone(deep = TRUE)
-  
+
   chat_clone$set_system_prompt(paste0(
     "You are a data cleaning assistant specializing in correcting categorical data. The correct categorical levels are: ",
     paste(levels, collapse = ", "), ". ",
@@ -70,13 +70,14 @@ print.emend_lvl_match <- function(x, ...) {
 #' @param .f A factor.
 #' @param levels The levels of the factor
 #' @param chat A chat object defined by ellmer.
+#' @return A factor with levels matching the provided `levels` argument.
 #'
 #' @examples
 #' \donttest{
 #' chat <- ellmer::chat_ollama(model = "llama3.1:8b", seed = 0, echo = "none")
 #' emend_fct_match(messy$country, levels = c("UK", "USA", "Canada", "Australia", "NZ"), chat = chat)
 #' }
-#' 
+#'
 #' @export
 emend_fct_match <- function(.f, levels = NULL, chat = get_default_chat()) {
   dict <- emend_lvl_match(.f, levels, chat)
@@ -93,7 +94,7 @@ emend_fct_match <- function(.f, levels = NULL, chat = get_default_chat()) {
 #' chat <- ellmer::chat_ollama(model = "llama3.1:8b", seed = 0, echo = "none")
 #' emend_fct_reorder(likerts$likert1, chat = chat) |> levels()
 #' }
-#' 
+#'
 #' @export
 emend_fct_reorder <- function(.f, chat = get_default_chat()) {
   if(is.null(.f)) cli::cli_abort("Please provide the input vector or factor.")
@@ -117,7 +118,7 @@ reorder_by_llm <- function(lvls, chat = get_default_chat()) {
       "Return score only."
     )
   )
-  
+
   senti_scores <- lapply(lvls, function(x) {
     chat_clone$chat(paste0(
       "Now process: ", x
@@ -132,6 +133,7 @@ reorder_by_llm <- function(lvls, chat = get_default_chat()) {
 }
 
 #' Get the unique levels of messy categorical data
+#'
 #' The returned value is a vector.
 #' The LLM will return full names instead of abbreviations.
 #' You can use this functions to clean up your categorical data and obtain unique levels.
@@ -144,11 +146,11 @@ reorder_by_llm <- function(lvls, chat = get_default_chat()) {
 #'
 #' @examples
 #' \donttest{
-#' options(ellmer_timeout_s = 3600) 
+#' options(ellmer_timeout_s = 3600)
 #' chat <- ellmer::chat_ollama(model = "llama3.1:8b", seed = 0, echo = "none")
 #' emend_lvl_unique(messy$country, chat = chat)
 #' }
-#' 
+#'
 #' @export
 emend_lvl_unique <- function(.f, chat = get_default_chat()){
   if(is.null(.f)) cli::cli_abort("Please provide the input vector or factor.")
@@ -156,7 +158,7 @@ emend_lvl_unique <- function(.f, chat = get_default_chat()){
   if(is.null(chat)) cli::cli_abort("Please provide the chat environment.")
 
   chat_clone <- chat$clone(deep = TRUE)
-  
+
   chat_clone$set_system_prompt(paste0(
     "You are a data cleaning assistant specializing in standardizing categorical data. ",
     "You will be given a list of messy names that may contain typos, abbreviations, or inconsistencies. ",
