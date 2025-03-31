@@ -6,4 +6,5 @@
 
 ## Submission comments
 
-This is the first submission of the package `emend`. 
+* This is the first submission of the package `emend`. 
+* There is no paper published for the method, so no reference for the description. 
