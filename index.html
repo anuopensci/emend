@@ -85,10 +85,17 @@
 <p><strong>If you want to use LLM via provider APIs:</strong> Follow the instructions on the <code>ellmer</code> <a href="https://ellmer.tidyverse.org/" class="external-link">website</a> to set up the API keys and create a desired <code>Chat</code> object.</p>
 </div>
 <div class="section level3">
+<h3 id="set-time-out">Set time out<a class="anchor" aria-label="anchor" href="#set-time-out"></a>
+</h3>
+<p>All ellmer chat object wait for 60s to get the complete response, to increase the waiting time, you could add this line of code in your script. This allows the LLM to wait up to 1 hour to get the complete response.</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span>ellmer_timeout_s <span class="op">=</span> <span class="fl">3600</span><span class="op">)</span> </span></code></pre></div>
+</div>
+<div class="section level3">
 <h3 id="categorise-text">Categorise text<a class="anchor" aria-label="anchor" href="#categorise-text"></a>
 </h3>
 <p>Some categorical variables can have simple typos or alternative representations. For example below we have “UK” written also as “United Kingdom”.</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">messy</span><span class="op">$</span><span class="va">country</span></span>
 <span><span class="co">#&gt;  [1] "UK"             "US"             "Canada"         "UK"            </span></span>
 <span><span class="co">#&gt;  [5] "US"             "Canada"         "United Kingdom" "USA"           </span></span>
@@ -96,14 +103,14 @@
 <span><span class="co">#&gt; [13] "UK"             "United Kingdom" "UK"             "US"            </span></span>
 <span><span class="co">#&gt; [17] "United Kingdom" "Australia"      "US"             "Australia"</span></span></code></pre></div>
 <p>While you can manually fix this, again, this can be tedious. We can map this automatically using <code><a href="reference/emend_fct_match.html">emend_fct_match()</a></code>.</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/emend_fct_match.html">emend_fct_match</a></span><span class="op">(</span><span class="va">messy</span><span class="op">$</span><span class="va">country</span>, levels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"UK"</span>, <span class="st">"USA"</span>, <span class="st">"Canada"</span>, <span class="st">"Australia"</span>, <span class="st">"NZ"</span><span class="op">)</span>, chat <span class="op">=</span> <span class="va">chat</span><span class="op">)</span></span>
 <span><span class="co">#&gt;  [1] UK        USA       Canada    UK        USA       Canada    UK       </span></span>
 <span><span class="co">#&gt;  [8] USA       NZ        NZ        Australia NZ        UK        UK       </span></span>
 <span><span class="co">#&gt; [15] UK        USA       UK        Australia USA       Australia</span></span>
 <span><span class="co">#&gt; Levels: UK USA Canada Australia NZ</span></span></code></pre></div>
 <p>The function actually works to match a continent as well! Let’s use <code><a href="reference/emend_lvl_match.html">emend_lvl_match()</a></code> to more easily see the conversion on the levels alone.</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/emend_lvl_match.html">emend_lvl_match</a></span><span class="op">(</span><span class="va">messy</span><span class="op">$</span><span class="va">country</span>, levels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Asia"</span>, <span class="st">"Europe"</span>, <span class="st">"North America"</span>, <span class="st">"Oceania"</span>, <span class="st">"South America"</span><span class="op">)</span>, chat <span class="op">=</span> <span class="va">chat</span><span class="op">)</span></span>
 <span><span class="co">#&gt;              UK              US          Canada  United Kingdom             USA </span></span>
 <span><span class="co">#&gt;        "Europe" "North America" "North America"        "Europe" "North America" </span></span>
@@ -121,13 +128,13 @@
 <span><span class="co">#&gt; 7             NZ       Oceania</span></span>
 <span><span class="co">#&gt; 8      Australia       Oceania</span></span></code></pre></div>
 <p>The above process required specification of all the levels but sometimes you may not know ahead all of the levels. The <code>emend_get_levels()</code> function will attempt to clean up the levels.</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">levels</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/emend_lvl_unique.html">emend_lvl_unique</a></span><span class="op">(</span><span class="va">messy</span><span class="op">$</span><span class="va">country</span>, chat <span class="op">=</span> <span class="va">chat</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">levels</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] "United Kingdom" "United States"  "Canada"         "New Zealand"   </span></span>
 <span><span class="co">#&gt; [5] "Australia"</span></span></code></pre></div>
 <p>Then you can use the cleaned levels to map the messy data to the correct levels.</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/emend_fct_match.html">emend_fct_match</a></span><span class="op">(</span><span class="va">messy</span><span class="op">$</span><span class="va">country</span>, levels <span class="op">=</span> <span class="va">levels</span>, chat <span class="op">=</span> <span class="va">chat</span><span class="op">)</span></span>
 <span><span class="co">#&gt;  [1] United Kingdom United States  Canada         United Kingdom United States </span></span>
 <span><span class="co">#&gt;  [6] Canada         United Kingdom United States  New Zealand    New Zealand   </span></span>
@@ -139,7 +146,7 @@
 <h3 id="correcting-order-of-levels-for-ordinal-variables">Correcting order of levels for ordinal variables<a class="anchor" aria-label="anchor" href="#correcting-order-of-levels-for-ordinal-variables"></a>
 </h3>
 <p>The levels of categorical variables by default are ordered alphabetically. This can be problematic when the levels have a natural order.</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="va">likerts</span><span class="op">$</span><span class="va">likert1</span><span class="op">)</span></span>
 <span><span class="co">#&gt;  [1] Strongly Disagree Neutral           Strongly Agree    Strongly Disagree</span></span>
 <span><span class="co">#&gt;  [5] Disagree          Somewhat Agree    Strongly Agree    Somewhat Disagree</span></span>
@@ -153,7 +160,7 @@
 <span><span class="co">#&gt; [37] Neutral           Somewhat Disagree Agree             Disagree         </span></span>
 <span><span class="co">#&gt; 7 Levels: Agree Disagree Neutral Somewhat Agree ... Strongly Disagree</span></span></code></pre></div>
 <p>A correct order may need to be manually specified like below, but it can be a tedious task.</p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="va">likerts</span><span class="op">$</span><span class="va">likert1</span>, </span>
 <span>       levels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Strongly Disagree"</span>, <span class="st">"Disagree"</span>, <span class="st">"Somewhat Disagree"</span>, <span class="st">"Neutral"</span>, <span class="st">"Somewhat Agree"</span>, <span class="st">"Agree"</span>, <span class="st">"Strongly Agree"</span><span class="op">)</span><span class="op">)</span> </span>
 <span><span class="co">#&gt;  [1] Strongly Disagree Neutral           Strongly Agree    Strongly Disagree</span></span>
@@ -168,7 +175,7 @@
 <span><span class="co">#&gt; [37] Neutral           Somewhat Disagree Agree             Disagree         </span></span>
 <span><span class="co">#&gt; 7 Levels: Strongly Disagree Disagree Somewhat Disagree ... Strongly Agree</span></span></code></pre></div>
 <p>The <code><a href="reference/emend_fct_reorder.html">emend_fct_reorder()</a></code> function will try to reorder the levels of the factor in a meaningful way <em>automatically</em> using a large language model.</p>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/emend_fct_reorder.html">emend_fct_reorder</a></span><span class="op">(</span><span class="va">likerts</span><span class="op">$</span><span class="va">likert1</span>, chat <span class="op">=</span> <span class="va">chat</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/base/levels.html" class="external-link">levels</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] "Strongly Disagree" "Disagree"          "Somewhat Disagree"</span></span>
 <span><span class="co">#&gt; [4] "Neutral"           "Somewhat Agree"    "Agree"            </span></span>
@@ -178,13 +185,13 @@
 <h3 id="translate">Translate<a class="anchor" aria-label="anchor" href="#translate"></a>
 </h3>
 <p>The <code><a href="reference/emend_translate.html">emend_translate()</a></code> function can be used to translate text to another language (default English). The text can be a mix of different languages.</p>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">text</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"猿も木から落ちる"</span>, <span class="st">"你好"</span>, <span class="st">"bon appetit"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="reference/emend_translate.html">emend_translate</a></span><span class="op">(</span><span class="va">text</span>, chat <span class="op">=</span> <span class="va">chat</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] "Even monkeys fall from trees." "Hello."                       </span></span>
 <span><span class="co">#&gt; [3] "Enjoy your meal."</span></span></code></pre></div>
 <p>You can also try to identify the language in the text.</p>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/emend_what_language.html">emend_what_language</a></span><span class="op">(</span><span class="va">text</span>, chat <span class="op">=</span> <span class="va">chat</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] "Japanese"         "Mandarin Chinese" "French"</span></span></code></pre></div>
 </div>
@@ -193,7 +200,7 @@
 <h2 id="dates">Dates<a class="anchor" aria-label="anchor" href="#dates"></a>
 </h2>
 <p>When combining data from different sources, inconsistencies in date formats can occur frequently. Reformatting dates to a single format using traditional programming requires listing all possible date formats and can be time-consuming. The <code><a href="reference/emend_clean_date.html">emend_clean_date()</a></code> function uses an LLM to standardise the dates to the international standard “YYYY-MM-DD”.</p>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"16/02/1997"</span>, <span class="st">"20 November 2024"</span>, <span class="st">"24 Mar 2022"</span>, <span class="st">"2000-01-01"</span>, <span class="st">"Jason"</span>, </span>
 <span>       <span class="st">"Dec 25, 2030"</span>, <span class="st">"11/05/2024"</span>, <span class="st">"March 10, 1999"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="reference/emend_clean_date.html">emend_clean_date</a></span><span class="op">(</span><span class="va">x</span>, chat <span class="op">=</span> <span class="va">chat</span><span class="op">)</span></span>
@@ -204,7 +211,7 @@
 <h2 id="addresses">Addresses<a class="anchor" aria-label="anchor" href="#addresses"></a>
 </h2>
 <p>When scraping data from websites or APIs, especially property-related information, addresses can present challenges. The <code><a href="reference/emend_clean_address.html">emend_clean_address()</a></code> function uses an LLM to standardise addresses into a consistent format and returns an empty value for items that are not addresses.</p>
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"154 university avenue, acton act 2601"</span>,</span>
 <span>       <span class="st">"76/2 Cape Street, Dickson ACT 2602"</span>,</span>
 <span>       <span class="st">"Shop 4/96 Bunda St, Canberra ACT 2601"</span>,</span>
@@ -242,6 +249,7 @@
   </main><aside class="col-md-3"><div class="links">
 <h2 data-toc-skip>Links</h2>
 <ul class="list-unstyled">
+<li><a href="https://cloud.r-project.org/package=emend" class="external-link">View on CRAN</a></li>
 <li><a href="https://github.com/anuopensci/emend/" class="external-link">Browse source code</a></li>
 <li><a href="https://github.com/anuopensci/emend/issues" class="external-link">Report a bug</a></li>
 </ul>
