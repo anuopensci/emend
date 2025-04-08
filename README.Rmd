@@ -62,6 +62,14 @@ chat <- ellmer::chat_ollama(model = "llama3.1:8b", seed = 0, echo = "none")
 
 __If you want to use LLM via provider APIs:__ Follow the instructions on the `ellmer` [website](https://ellmer.tidyverse.org/) to set up the API keys and create a desired `Chat` object. 
 
+### Set time out
+
+All ellmer chat object wait for 60s to get the complete response, to increase the waiting time, you could add this line of code in your script. This allows the LLM to wait up to 1 hour to get the complete response.
+
+```{r}
+options(ellmer_timeout_s = 3600) 
+```
+
 ### Categorise text
 
 Some categorical variables can have simple typos or alternative representations. For example below we have "UK" written also as "United Kingdom". 
